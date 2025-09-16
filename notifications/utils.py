@@ -10,6 +10,7 @@ def send_email_via_automation(path, payload):
     differentiating between staging and production environments.
     """
     try:
+        print("Payload received:", payload) 
         # For demo/mock, we’ll just use httpbin
         if "httpbin.org" in settings.AUTOMATION_WORKFLOW_URL:
             workflow_url = f"{settings.AUTOMATION_WORKFLOW_URL}/post"
@@ -23,7 +24,10 @@ def send_email_via_automation(path, payload):
         print("Response text:", response.text)  # debug
 
         if response.status_code == 200:
-            return response.json()
+            return {
+                "workflow_response": response.json(),
+                "original_payload": payload  
+            }
         else:
             logger.error(
                 "Failed to send email via automation workflow",
