@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def send_email_via_automation(path, payload):
+def send_email_via_automation(payload):
     """
     Sends email requests through the automation workflow,
     differentiating between staging and production environments.
@@ -12,10 +12,10 @@ def send_email_via_automation(path, payload):
     try:
         print("Payload received:", payload) 
         # For demo/mock, we’ll just use httpbin
-        if "httpbin.org" in settings.AUTOMATION_WORKFLOW_URL:
-            workflow_url = f"{settings.AUTOMATION_WORKFLOW_URL}/post"
-        else:
-            workflow_url = f"{settings.AUTOMATION_WORKFLOW_URL}/{settings.ENVIRONMENT}/api{path}"
+        
+        workflow_url = f"{settings.AUTOMATION_WORKFLOW_URL}"
+       
+          
         
         response = requests.post(workflow_url, json=payload, timeout=5)
 

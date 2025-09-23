@@ -132,8 +132,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Environment
 ENVIRONMENT = "staging"  # or production
 
-# Automation workflow endpoint
-AUTOMATION_WORKFLOW_URL = "https://httpbin.org"
+
+# Automation workflow endpoint from environment variable, with default fallback
+import os
+AUTOMATION_WORKFLOW_URL = os.environ.get("AUTOMATION_WORKFLOW_URL", "https://httpbin.org/post")
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
